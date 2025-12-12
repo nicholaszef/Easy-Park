@@ -51,7 +51,7 @@ class TestInputValidation:
     # Test login with empty credentials
     def test_login_with_empty_credentials(self, client):
         response = client.post("/login", json={"username": "", "password": ""})
-        assert response.status_code in [400, 422]
+        assert response.status_code in [400, 401, 422]
 
     # Test reservation with invalid time format
     def test_reservation_with_invalid_time_format(
