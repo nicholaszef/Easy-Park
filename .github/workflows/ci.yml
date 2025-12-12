@@ -37,7 +37,12 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov pytest-asyncio httpx
 
+      - name: Create data directory
+        run: mkdir -p data
+
       - name: Run tests with coverage
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest tests/ -v --cov=app --cov-report=xml --cov-report=term-missing --cov-fail-under=95
 
