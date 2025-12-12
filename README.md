@@ -45,7 +45,7 @@ pytest tests/ -v --cov=app --cov-report=html
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 Easy-Park/
