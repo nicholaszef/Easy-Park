@@ -33,19 +33,19 @@ pytest tests/ -v --cov=app --cov-report=html
 
 ## Features
 
-- ✅ **JWT Authentication** - Secure token-based authentication
-- ✅ **Role-Based Access Control** - Admin and user roles with different permissions
-- ✅ **Real-time Slot Availability** - Check parking slot availability before booking
-- ✅ **Conflict Detection** - Automatic detection of overlapping reservations
-- ✅ **Comprehensive Testing** - 95%+ test coverage with unit, integration, and security tests
-- ✅ **CI/CD Pipeline** - Automated testing, linting, and Docker builds
-- ✅ **API Documentation** - Auto-generated Swagger/OpenAPI docs
-- ✅ **Health Checks** - Built-in health check endpoint for monitoring
-- ✅ **CORS Support** - Cross-origin resource sharing enabled
+- **JWT Authentication** - Secure token-based authentication
+- **Role-Based Access Control** - Admin and user roles with different permissions
+- **Real-time Slot Availability** - Check parking slot availability before booking
+- **Conflict Detection** - Automatic detection of overlapping reservations
+- **Comprehensive Testing** - 95%+ test coverage with unit, integration, and security tests
+- **CI/CD Pipeline** - Automated testing, linting, and Docker builds
+- **API Documentation** - Auto-generated Swagger/OpenAPI docs
+- **Health Checks** - Built-in health check endpoint for monitoring
+- **CORS Support** - Cross-origin resource sharing enabled
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 Easy-Park/
