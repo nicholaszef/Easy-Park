@@ -3,10 +3,10 @@
 from datetime import datetime, timedelta
 from typing import Any, Dict, Optional
 
+import bcrypt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 
 from ..models.enums import PeranUser
 
@@ -15,18 +15,25 @@ SECRET_KEY = "your-secret-key-change-in-production-min-32-chars-long"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 480  # 8 hours
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 
 def hash_password(plain: str) -> str:
     """Hash a plain text password."""
-    return pwd_context.hash(plain)
+    password_bytes = plain.encode('utf-8')
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password_bytes, salt)
+    return hashed.decode('utf-8')
 
 
 def verify_password(plain: str, hashed: str) -> bool:
     """Verify a password against its hash."""
-    return pwd_context.verify(plain, hashed)
+    try:
+        password_bytes = plain.encode('utf-8')
+        hashed_bytes = hashed.encode('utf-8')
+        return bcrypt.checkpw(password_bytes, hashed_bytes)
+    except Exception:
+        return False
 
 
 def create_access_token(
