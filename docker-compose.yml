@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: easypark-app
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: easypark-test
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./tests:/app/tests
+      - ./app:/app/app
+      - ./htmlcov:/app/htmlcov
+    command: pytest tests/ -v --cov=app --cov-report=html --cov-report=term-missing
